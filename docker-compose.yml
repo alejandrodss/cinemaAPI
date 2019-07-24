@@ -1,0 +1,18 @@
+version: '2'
+services:
+  web:
+    build: .
+    volumes:
+      - "./:/cinemaAPI"
+    ports:
+     - "3000:3000"
+    command: "bin/rails s -p 3000 -b '0.0.0.0'"
+    depends_on:
+      - database_cinema
+    links:
+      - database_cinema:database_cinema
+    stdin_open: true
+  database_cinema:
+    image: postgres:10.8
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
