@@ -26,6 +26,7 @@ gem 'turbolinks', '~> 5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'haml-rails', '~> 2.0'
 gem 'json', '>=2.2.0'
+gem 'mini_racer'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.8'
