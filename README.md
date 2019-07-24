@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Cinema API app made with rails
 
-Things you may want to cover:
+* Ruby version: 2.6.3
+* Rails version: 5.2
 
-* Ruby version
+The app uses docker and docker-compose to run on local environment.
 
-* System dependencies
+To setup and start application run:
+* sudo docker-compose run web bundle install
+* sudo docker-compose run web bin/rails db:create
+* sudo docker-compose run web bin/rails db:migrate
+* sudo docker-compose up
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+For execute test
+* sudo docker-compose run web bin/rails db:test:prepare
+* sudo docker-compose run web bundle exec rspec spec/
