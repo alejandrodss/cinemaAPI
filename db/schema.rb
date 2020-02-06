@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 2019_07_24_011423) do
 
   create_table "days", force: :cascade do |t|
     t.string "name"
+    t.string "code", null: false
+    t.index ["code"], name: "index_days_on_code", unique: true
   end
 
   create_table "movie_days", force: :cascade do |t|

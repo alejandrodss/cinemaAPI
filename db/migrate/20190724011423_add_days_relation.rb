@@ -1,4 +1,4 @@
-class AddDays < ActiveRecord::Migration[5.2]
+class AddDaysRelation < ActiveRecord::Migration[5.2]
   def up
     create_table :movie_days do |t|
       t.belongs_to :day, index: true

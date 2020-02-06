@@ -5,8 +5,8 @@ RSpec.describe MoviesController, type: :request do
   let(:movie2) { Movie.create(name: "El señor de los anillos", description: "El anillo unico", image_url: "https://lordoftherings.com") }
   let(:movie3) { Movie.create(name: "Harry Potter", description: "Los magos de Hogwarts", image_url: "https://harrypotter.com") }
 
-  let(:day1) { Day.create(name: "Viernes") }
-  let(:day2) { Day.create(name: "Domingo") }
+  let(:day1) { Day.find_by(code: "F") }
+  let(:day2) { Day.find_by(code: "S") }
 
   before do
     MovieDay.create(day_id: day1.id, movie_id: movie2.id)
@@ -30,6 +30,10 @@ RSpec.describe MoviesController, type: :request do
       expect(json.size).to eq(2)
       expect(json).to match_array([{"id"=>movie2.id, "name"=>"El señor de los anillos", "description"=>"El anillo unico", "image_url"=>"https://lordoftherings.com"},
         {"id"=>movie1.id, "name"=>"Star Wars", "description"=>"Una historia ocurrida en la galaxia", "image_url"=>"https://starwars.com"}])
+    end
+  end
+  describe "POST/movies" do
+    it "Insert a new movie" do
     end
   end
 end

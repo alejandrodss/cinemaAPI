@@ -2,6 +2,7 @@ class AddReservations < ActiveRecord::Migration[5.2]
   def up
     create_table :days do |table|
       table.string :name
+      table.string :code, null: false, index: { unique: true }
     end
 
     create_table :reservations do |table|

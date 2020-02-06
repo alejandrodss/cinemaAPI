@@ -47,3 +47,6 @@ group :development do
   gem 'brakeman'
 end
 
+group :test do
+  gem 'database_cleaner-active_record'
+end
