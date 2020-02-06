@@ -33,7 +33,27 @@ RSpec.describe MoviesController, type: :request do
     end
   end
   describe "POST/movies" do
-    it "Insert a new movie" do
+    context "The movie is not scheduled yet" do
+      it "Create a new movie" do
+        post "/movies", params: { name: "X-Men", description: "a Mutants story", image_url: "https://portalgeek.co/wp-content/uploads/2019/09/XMEN.jpg", days: ["F", "S", "U"] }
+
+        json = JSON.parse(response.body)
+        expect(json["message"]).to eq("La película X-Men ha sido agregada exitosamente")
+        expect(json["id"]).to eq(Movie.last.id)
+        expect(json["name"]).to eq("X-Men")
+      end
+    end
+    context "The movie is already scheduled" do
+      it "Does not create a new movie" do
+        movie = Movie.create(name: "X-Men", description: "A Mutants story", image_url: "https://portalgeek.co/wp-content/uploads/2019/09/XMEN.jpg")
+        movie.day_ids = [day1.id]
+
+        post "/movies", params: { name: "X-Men", description: "a Mutants story", image_url: "https://portalgeek.co/wp-content/uploads/2019/09/XMEN.jpg", days: ["F"] }
+
+        json = JSON.parse(response.body)
+        expect(json["message"]).to eq("La película ya ha sido agregada")
+        expect(response.status).to eq(400)
+      end
     end
   end
 end
